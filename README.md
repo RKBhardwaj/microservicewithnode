@@ -1,4 +1,4 @@
-# Micro services with Node
+# Blog application using micro services with Node(BE) and React(FE)
 This application uses the microservice architecture to build up.
 
 # Pre-requisites to run the application
