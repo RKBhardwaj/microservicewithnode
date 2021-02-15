@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moderation-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moderation
+  template:
+    metadata:
+      labels:
+        app: moderation
+    spec:
+      containers: 
+        - name: moderation
+          image: rkbhardwaj88/moderation
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moderation-srv #Name of the service
+spec:
+  type: ClusterIP #type of service (ClusterIP, Node Port, Load Balancer)
+  selector:
+    app: moderation #name of the app for which the service is created
+  ports:
+    - name: moderation
+      protocol: TCP
+      port: 4003 #This the port for the node service
+      targetPort: 4003  #This is port where the moderation node service is listening - refernce moderation/index.js
+

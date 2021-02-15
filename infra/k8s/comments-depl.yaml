@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: comments
+  name: comments-depl
 spec:
   replicas: 1
   selector:
@@ -12,20 +12,22 @@ spec:
       labels:
         app: comments
     spec:
-      containers:
+      containers: 
         - name: comments
           image: rkbhardwaj88/comments
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: comments-srv
+  name: comments-srv #Name of the service
 spec:
-  type: ClusterIP
+  type: ClusterIP #type of service (ClusterIP, Node Port, Load Balancer)
   selector:
-    app: comments
+    app: comments #name of the app for which the service is created
   ports:
     - name: comments
       protocol: TCP
-      port: 4001
-      targetPort: 4001
+      port: 4001 #This the port for the node service
+      targetPort: 4001  #This is port where the comments node service is listening - refernce comments/index.js
+
+
